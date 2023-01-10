@@ -48,6 +48,27 @@ def center1():
     center = [0, 0]
     center[0], center[1] = (x1 + x2) / 2, (y1 + y2) / 2
     return center
+def check(s,center,result):
+    print(s)
+    print(center)
+    print(result)
+    c1=center[0]
+    c2=center[1]
+    if s[0] >= 1 and s[1] >=1:
+        result[0, :] -= c1
+        result[1, :] -= c2
+    elif s[0] >=1 and s[1] <1:
+        result[0, :] -= c1
+        result[1, :] += c2
+    elif s[0] <1 and s[1] >=1:
+        result[0, :] += c1
+        result[1, :] -= c2
+    elif s[0] < 1. and s[1] < 1. :
+        print('fail')
+        result[0, :] += c1
+        result[1, :] += c2
+        pass
+    return result
 def transalate_img(t):
     Pt=shortcut1()
     M = np.array([[1, 0, t[0]],
@@ -66,12 +87,13 @@ def scale_img(s):
     M= np.array([[s[0],0,0],
                  [0,s[1],0]],dtype=np.float32)
     center=center1()
-    print(center)
     result= np.dot(M,Pt)
-    result[0,:]-=center[0]
-    result[1,:]-=center[1]
+    set_corr(result)
+    center_new=center1()
+    center_new=np.abs(np.array(center_new)-np.array(center))
+    print(center_new)
+    result=check(s,center_new,result)
     result=result.astype(np.int32)
-    print(result)
     set_corr(result)
 def draw_rectangle(event, x, y ,flag, param):
     global ix, iy,img,drawing,stat,rec_corr,width,height
@@ -130,6 +152,8 @@ while True:
         t= get_input()
         scale_img(t)
         draw()
+    if func ==6:
+        break
     cv2.imshow('result', img)
     if cv2.waitKey(10) == 27:
         break
