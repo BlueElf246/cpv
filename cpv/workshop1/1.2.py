@@ -122,6 +122,11 @@ def reset():
     img[:] = 255, 255, 255
 while True:
     func=int(input('choose func'))
+    print('tao hinh\n')
+    print('ve hinh\n')
+    print('translate\n')
+    print('rotate\n')
+    print('scale\n')
     if func==1:
         # create background
         reset()
