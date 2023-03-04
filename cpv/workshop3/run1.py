@@ -79,7 +79,7 @@ def harris(a):
     cv2.imshow('result', img_1)
 def hog_i(image):
 
-    fd, hog_image = hog(image, orientations=8, pixels_per_cell=(16, 16),
+    fd, hog_image = hog(image, orientations=16, pixels_per_cell=(8, 8),
                         cells_per_block=(1, 1), visualize=True, channel_axis=-1)
     print(fd)
     print(len(fd))
@@ -123,7 +123,7 @@ def hough(img, thresh=10, rho=1, low_thresh=50, high_thresh=100):
         y2 = int(y0 - 1000 * (a))
         cv2.line(line_image, (x1, y1), (x2, y2), (0, 0, 255), 2)
     edges= cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)
-    return np.vstack((line_image,edges))
+    return np.hstack((line_image,edges))
 def get_hough_para():
     return cv2.getTrackbarPos('thresh','hough'), cv2.getTrackbarPos('rho', 'hough'), cv2.getTrackbarPos('low_thresh', 'hough'), cv2.getTrackbarPos('high_thresh','hough')
 def hough_thresh(a):
@@ -138,14 +138,13 @@ while True:
     4: Perform Hough Transform
     5: Exit
     """)
-    # f = int(input('choose option'))
-    f=1
+    f = int(input('choose option'))
     if f==1:
         print('***Harris Corner***')
         cv2.namedWindow('result')
         # cv2.createTrackbar('qualityLevel', 'result', 10, 10, change_color)
         # cv2.createTrackbar('minDistance', 'result', 10, 1000, change_color)
-        img= read_img(img_path="img_data/Cars108.png")
+        img= read_img(img_path="img_data/download.jpeg")
         cv2.createTrackbar('thresh_hold', 'result', 1, 100, harris)
         cv2.createTrackbar('block_size', 'result', 1, 10, harris)
         cv2.createTrackbar('k_size', 'result', 1, 10, harris)
@@ -175,7 +174,7 @@ while True:
     if f==4:
         print('Hough Transform')
         cv2.namedWindow('hough')
-        img = read_img(img_path="img_data/Cars108.png")
+        img = read_img(img_path="img_data/download.jpeg")
         cv2.createTrackbar('thresh', 'hough', 50,100,hough_thresh)
         cv2.createTrackbar('rho', 'hough', 1,3, hough_thresh)
         cv2.createTrackbar('low_thresh', 'hough',1,255, hough_thresh)
