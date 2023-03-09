@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import imageio
 cv2.ocl.setUseOpenCL(False)
 import warnings
-os.chdir("/Users/datle/Documents/PycharmProjects 08.55.25/pythonProject/opencv")
-images_path= glob.glob('unstiched/*.JPG')
+os.chdir("/Users/datle/Desktop/CPV/cpv/workshop6/images")
+images_path= glob.glob('*.JPG')
 images=[]
 
 feature_extraction_algo = 'sift'
