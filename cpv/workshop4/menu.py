@@ -25,7 +25,7 @@ def menu():
         water_shed("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/water_coins.jpeg")
     if f==3:
         print('k-means-segmentation')
-        k_means_segment("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/cock_bird.jpeg", K=2)
+        k_means_segment("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/cock_bird.jpeg", K=4)
     if f==4:
         print("mean-shift segmentation")
         mean_shift("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/water_coins.jpeg")
