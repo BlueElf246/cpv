@@ -11,7 +11,7 @@ def menu():
     if f==1:
         print('active contour')
         # for more detail see: https://github.com/pmneila/morphsnakes
-        img= cv2.imread("active_contour/camera.png")
+        img= cv2.imread("active_contour/download.jpeg")
         img= cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)/255.0
         callback = example.visual_callback_2d(img)
 
@@ -25,9 +25,9 @@ def menu():
         water_shed("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/water_coins.jpeg")
     if f==3:
         print('k-means-segmentation')
-        k_means_segment("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/cock_bird.jpeg", K=4)
+        k_means_segment("/Users/datle/Desktop/CPV/cpv/workshop4/kmean_clusters/ocean.jpeg", K=2)
     if f==4:
         print("mean-shift segmentation")
-        mean_shift("/Users/datle/Desktop/CPV/cpv/workshop4/watershed/water_coins.jpeg")
+        mean_shift("/Users/datle/Desktop/CPV/cpv/workshop4/kmean_clusters/ocean.jpeg")
 
 menu()
