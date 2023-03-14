@@ -59,7 +59,7 @@ def predict_image(img, training_dataset_encoded, mean_face, eigenFaces, label, i
     # print(diff[idx])
     return label[idx], diff[idx]
 
-r=eigen_extraction("/Users/datle/Desktop/CPV/cpv/workshop8/eigenfaces/dataset", k=8, id_list=[1,2,3,4])
+r=eigen_extraction("/Users/datle/Desktop/CPV/cpv/workshop8/eigenfaces/dataset", k=25, id_list=[1,2,3,4])
 # img= cv2.imread("/Users/datle/Desktop/eigenfaces/dataset/id2/0.jpeg")
 # params=pickle.load(open("model.pkl", 'rb'))
 # database_encoded, mean_face, eigenFace, label, image_shape= params['database_id'], params['mean_face'], \

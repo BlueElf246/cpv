@@ -9,7 +9,7 @@ def taking_image(id=1):
     cap = cv2.VideoCapture(0)
     while cap.isOpened():
         _, frame = cap.read()
-        if count < 10:
+        if count < 50:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = face_detector.detectMultiScale(gray,1.1, 4 )
             for (x,y, w, h) in faces:
@@ -35,4 +35,4 @@ def taking_image(id=1):
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     frame.release()
-face_matrix= taking_image(id=1)
+face_matrix= taking_image(id=2)

@@ -12,14 +12,18 @@ def run():
     while cap.isOpened():
         _, frame = cap.read()
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        faces = face_detector.detectMultiScale(gray,1.1, 4 )
+        faces = face_detector.detectMultiScale(gray,1.1, 9)
         for (x,y, w, h) in faces:
             cv2.rectangle(frame, pt1 = (x,y),pt2 = (x+w, y+h), color = (255,0,0),thickness =  3)
             face= frame[y+2:y+h-2, x+2:x+w-2]
             area= w*h
             if area >11000:
                 p, score = predict_image(face, database_encoded, mean_face, eigenFace, label, image_shape)
-                cv2.putText(frame, str(p), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
+                print(score/1000000)
+                if int(score/1000000) > 300:
+                    cv2.putText(frame, 'unknowns', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
+                else:
+                    cv2.putText(frame, str(p), (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
         cv2.imshow("window", frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
