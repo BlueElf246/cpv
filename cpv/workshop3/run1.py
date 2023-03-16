@@ -13,7 +13,6 @@ def harris_corner(img, thresh, block_size, k_size, k):
     img_gray= cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img_gray= np.array(img_gray).astype('float32')
     # Detect corners
-
     #blocksize: blockSize: Neighborhood size for the corner detection algorithm. It is the size of the window used to detect the corners.
     # related to size of w(x,y)
     """Larger values of blockSize result in a larger window being considered, 
@@ -30,51 +29,16 @@ def harris_corner(img, thresh, block_size, k_size, k):
     dst = cv2.dilate(dst, None)
     a_1 = thresh / 100
     print(f"thresh: {a_1}, block_size: {block_size}, k_size:{k_size}, k: {k}")
-    # X=np.array(np.where(dst > a_1 * dst.max())).T
-    # kmeans = KMeans(n_clusters=4, random_state=0, n_init="auto").fit(X)
     thresh=a_1 * dst.max()
     for j in range(0, dst.shape[0]):
         for i in range(0, dst.shape[1]):
             if (dst[j, i] > thresh):
-                # image, center pt, radius, color, thickness
-                # r= kmeans.predict(np.array([j,i]).reshape(1,-1))
-                # if r[0]==1:
-                #     cv2.circle(img, (i, j), 1, (0, 255, 0), 1)
-                # if r[0]==0:
-                #     cv2.circle(img, (i, j), 1, (0, 0, 255), 1)
-                # if r[0]==2:
-                #     cv2.circle(img, (i, j), 1, (255, 0, 0), 1)
-                # if r[0]==3:
-                #     cv2.circle(img, (i, j), 1, (255, 0, 255), 1)
                 cv2.circle(img, (i, j), 1, (255, 0, 255), 1)
-    # img[dst > a_1 * dst.max()] = [0, 0, 255]
-    # plt.imshow(dst, cmap='gray')
-    # cv2.imshow('result', img)
-    # cv2.waitKey(0)
     return img
-def shi_tomasi(image,a,b,c):
-    # Converting to grayscale
-    image=image.copy()
-    gray_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    corners_img = cv2.goodFeaturesToTrack(image=gray_img, maxCorners=a, qualityLevel=0.09, minDistance=c)
-    corners_img = np.int0(corners_img)
-    for corners in corners_img:
-        x, y = corners.ravel()
-        # Circling the corners in green
-        cv2.circle(image, (x, y), 3, [0, 255, 0], -1)
-    # cv2.imshow('result', image)
-    # Specifying maximum number of corners as 1000
-    # 0.01 is the minimum quality level below which the corners are rejected
-    # 10 is the minimum euclidean distance between two corners
-    #image, maxCorners, qualityLevel, minDistance
-    # cv2.imshow('result', image)
-    # cv2.waitKey(0)
-    return image
 def get_harris_params():
     return cv2.getTrackbarPos('thresh_hold', 'result'), cv2.getTrackbarPos('block_size', 'result'), cv2.getTrackbarPos('k_size', 'result'), cv2.getTrackbarPos('k', 'result')
 def harris(a):
     thresh, block_size, k_size, k=get_harris_params()
-    print(thresh, block_size, k_size, k)
     img_1 = harris_corner(img, thresh, block_size, k_size, k)
     cv2.imshow('result', img_1)
 def hog_i(image):

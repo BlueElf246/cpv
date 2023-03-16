@@ -49,9 +49,6 @@ def center1():
     center[0], center[1] = (x1 + x2) / 2, (y1 + y2) / 2
     return center
 def check(s,center,result):
-    print(s)
-    print(center)
-    print(result)
     c1=center[0]
     c2=center[1]
     if s[0] >= 1 and s[1] >=1:
@@ -63,11 +60,9 @@ def check(s,center,result):
     elif s[0] <1 and s[1] >=1:
         result[0, :] += c1
         result[1, :] -= c2
-    elif s[0] < 1. and s[1] < 1. :
-        print('fail')
+    elif s[0] < 1. and s[1] < 1.:
         result[0, :] += c1
         result[1, :] += c2
-        pass
     return result
 def transalate_img(t):
     Pt=shortcut1()
@@ -91,7 +86,6 @@ def scale_img(s):
     set_corr(result)
     center_new=center1()
     center_new=np.abs(np.array(center_new)-np.array(center))
-    print(center_new)
     result=check(s,center_new,result)
     result=result.astype(np.int32)
     set_corr(result)
@@ -121,12 +115,8 @@ def reset():
     global img
     img[:] = 255, 255, 255
 while True:
+    print('1:tao hinh\t2:ve hinh\t3:translate\t4:rotate\t5:scale')
     func=int(input('choose func'))
-    print('tao hinh\n')
-    print('ve hinh\n')
-    print('translate\n')
-    print('rotate\n')
-    print('scale\n')
     if func==1:
         # create background
         reset()

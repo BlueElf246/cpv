@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-img = cv2.imread("Lenna.png", cv2.IMREAD_COLOR)
+img = cv2.imread("Lenna.jpeg", cv2.IMREAD_COLOR)
 # from Equalization import *
 def func1(img,gamma):
     # scale image into 0,1
@@ -146,9 +146,9 @@ def histogram_equalization(img, bShow=False):
 def run1():
     global img
     while True:
-        print("1:color balance\n2:histogram equalization\n3:median filter\n4:mean filter\n5:Gaussian smoothing\n6:Fourier_Transform\n7:exit")
+        print("1:color balance\t2:histogram equalization\t3:median filter\t4:mean filter\t5:Gaussian smoothing\t6:Fourier_Transform\t7:exit")
         f=input('input function:')
-        if f =='1':
+        if f == '1':
             cv2.namedWindow('result')
             cv2.createTrackbar('gamma','result',10,100,on_track_bar)
             cv2.setTrackbarMax('gamma', 'result', 20)
@@ -162,7 +162,7 @@ def run1():
                 if k == 27:
                     break
             cv2.destroyWindow('result')
-        if f=='2':
+        if f == '2':
             cv2.namedWindow('result')
             a1=drawHistogram(img)
             img_hsv=cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
